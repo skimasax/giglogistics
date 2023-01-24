@@ -11,5 +11,12 @@ class LogisticsController extends Controller
 {
     //
 	use Gig;
+
+	public function index(Request $request)
+	{
+		$data = $this->getStations();
+
+		dd($data);
+	}
    
 }
