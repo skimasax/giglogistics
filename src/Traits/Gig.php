@@ -5,7 +5,7 @@ namespace Skima\Giglogistics\Traits;
 
 trait Gig
 {
-   public $gigBaseUrl;
+    public $gigBaseUrl;
     public $gigPost;
 
     public function login()
@@ -20,18 +20,22 @@ trait Gig
 
         return $data->Object->access_token;
 
+     
     }
 
     public function getStations()
     {
 
-       $this->gigBaseUrl = config("constants.gig.baseurl")."localStations";
+       $this->gigBaseUrl = config("constants.gig.baseurl")."/localStations";
 
         $data = $this->GigCurl();
 
         return $data;
 
     }
+
+    
+    
 
 
 
@@ -75,10 +79,11 @@ trait Gig
       public function GigCurl()
     {
         $token = $this->login();
+
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => $this->gigBaseUrl,
+            CURLOPT_URL => "https://giglthirdpartyapitestenv.azurewebsites.net/api/thirdparty/localStations",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -86,7 +91,7 @@ trait Gig
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
-                "Authorization: Bearer".$token,
+                "Authorization: Bearer ".$token,
                 "Cache-Control: no-cache",
             ),
         ));

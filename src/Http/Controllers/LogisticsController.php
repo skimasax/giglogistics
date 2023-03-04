@@ -16,7 +16,7 @@ class LogisticsController extends Controller
 	{
 		$data = $this->getStations();
 
-		dd($data);
+		return response()->json(['data' => $data, 'status' => 200]);
 	}
    
 }
